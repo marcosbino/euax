@@ -1,0 +1,37 @@
+<%= form_with(model: projeto, local: true) do |form| %>
+  <% if projeto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(projeto.errors.count, "error") %> prohibited this projeto from being saved:</h2>
+
+      <ul>
+      <% projeto.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <%= form.label :nome, class: "input-group-text" %>
+      </div>
+      <%= form.text_field :nome, id: :projeto_nome %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :dataIni %>
+    <%= form.datetime_select :dataIni, id: :projeto_dataIni %>
+  </div>
+
+  <div class="field">
+    <%= form.label :dataFim %>
+    <%= form.datetime_select :dataFim, id: :projeto_dataFim %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Enviar', class: 'btn btn-small btn-success' %>
+    <%= link_to 'Voltar', projetos_path, class: 'btn btn-small btn-primary' %>
+  </div>
+<% end %>

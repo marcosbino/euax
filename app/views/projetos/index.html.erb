@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Projetos</h1>
+
+<table class="table table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th>Nome</th>
+      <th>Data de início</th>
+      <th>Data final</th>
+      <th>% Completo</th>
+      <th>Atrasado</th>
+      <th colspan="3" class="text-center">Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @projetos.each do |projeto| %>
+    <% @total = projeto.atividades.count %>
+    <% @total2 = projeto.atividades.where(finalizada: true).count %>
+    <% @porcentagem = (Float(@total2) / @total *100) %>
+      <tr>
+        <td><%= projeto.nome %></td>
+        <td><%= projeto.dataIni.strftime("%d/%m/%Y - %H:%M") %></td>
+        <td><%= projeto.dataFim.strftime("%d/%m/%Y - %H:%M") %></td>
+        <td><%= number_to_percentage(@porcentagem, precision: 1) %></td>
+        <td><%= (projeto.atividades.where("dataFim >= :data_final", {data_final: projeto.dataFim}).count != 0)? "Sim" : "Não" %></td>
+        <td><%= link_to 'Ver', projeto, class: 'btn btn-small btn-primary' %></td>
+        <td><%= link_to 'Editar', edit_projeto_path(projeto), class: 'btn btn-small btn-primary' %></td>
+        <td><%= link_to 'Deletar', projeto, method: :delete, data: { confirm: 'Tem certeza que deseja deletar?' }, class: 'btn btn-small btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<%= link_to 'Novo Projeto', new_projeto_path, class: 'btn btn-small btn-success' %>
+<%= link_to 'Atividades', atividades_path, class: 'btn btn-small btn-primary' %>

@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<h1>
+  Projeto: 
+  <%= @projeto.nome %>
+</h1>
+
+<p>
+  <strong>Dataini:</strong>
+  <%= @projeto.dataIni.strftime("%d/%m/%Y - %H:%M") %>
+</p>
+
+<p>
+  <strong>Datafim:</strong>
+  <%= @projeto.dataFim.strftime("%d/%m/%Y - %H:%M") %>
+</p>
+<p>
+  <% @total = @projeto.atividades.count %>
+  <% @total2 = @projeto.atividades.where(finalizada: true).count %>
+  <% @porcentagem = (Float(@total2) / @total *100) %>
+  <strong>Atividades (<%= @total %>)</strong>
+  <strong>Finalizados (<%= @total2 %>)</strong>
+  <strong>Porcentagem (<%= number_to_percentage(@porcentagem, precision: 1) %>)</strong>
+</p>
+  <table class="table table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th>Nome</th>
+      <th>Data de início</th>
+      <th>Data final</th>
+      <th>Finalizada?</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @projeto.atividades.each do |atividade| %>
+      <tr>
+        <td><%= atividade.nome %></td>
+        <td><%= atividade.dataIni.strftime("%d/%m/%Y - %H:%M") %></td>
+        <td><%= atividade.dataFim.strftime("%d/%m/%Y - %H:%M") %></td>
+        <td><%= (atividade.finalizada)? "Finalizado" : "Em aberto" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to 'Editar', edit_projeto_path(@projeto), class: 'btn btn-small btn-primary' %>
+<%= link_to 'Votar', projetos_path, class: 'btn btn-small btn-primary' %>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome: MyString
+  dataIni: 2020-05-15 17:54:02
+  dataFim: 2020-05-15 17:54:02
+  finalizada: false
+  projeto: one
+
+two:
+  nome: MyString
+  dataIni: 2020-05-15 17:54:02
+  dataFim: 2020-05-15 17:54:02
+  finalizada: false
+  projeto: two

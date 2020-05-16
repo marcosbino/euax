@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nome:</strong>
+  <%= @atividade.nome %>
+</p>
+
+<p>
+  <strong>Data de início:</strong>
+  <%= @atividade.dataIni.strftime("%d/%m/%Y - %H:%M") %>
+</p>
+
+<p>
+  <strong>Data final:</strong>
+  <%= @atividade.dataFim.strftime("%d/%m/%Y - %H:%M") %>
+</p>
+
+<p>
+  <strong>Finalizada:</strong>
+  <%= @atividade.finalizada %>
+</p>
+
+<p>
+  <strong>Projeto:</strong>
+  <%= @atividade.projeto.nome %>
+</p>
+
+<%= link_to 'Editar', edit_atividade_path(@atividade), class: 'btn btn-small btn-primary' %>
+<%= link_to 'Voltar', atividades_path, class: 'btn btn-small btn-primary' %>
